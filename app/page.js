@@ -10,18 +10,8 @@ export default function Home() {
   return (
     <main className="main">
       <Banner />
-      <section className="list-section">
-        <h2 className="list-section__title" id="popular">
-          Популярное
-        </h2>
-        <PopularCardsList />
-      </section>
-      <section className="list-section">
-        <h2 className="list-section__title" id="new">
-          Новинки
-        </h2>
-        <NewCardsList />
-      </section>
+      <PopularCardsList />
+      <NewCardsList />
       <Promo />
     </main>
   );
