@@ -32,3 +32,45 @@
   align-self: center;
   justify-self: center;
 }
+
+@media (width <= 1440px) {
+  .banner__title {
+    font-size: 30px;
+  }
+}
+
+@media (width <= 1024px) {
+  .banner {
+    grid-template-columns: 1fr;
+    padding: 80px 40px;
+  }
+
+  .banner__title {
+    width: 70%;
+    max-width: 100%;
+  }
+
+  .banner__text-block {
+    max-width: 100%;
+  }
+
+  .banner__image {
+    display: none;
+  }
+}
+
+@media (width <= 768px) {
+  .banner__text-block {
+    padding-left: 0;
+  }
+
+  .banner__link {
+    margin-left: 0;
+  }
+}
+
+@media (width <= 650px) {
+  .banner {
+    padding: 80px 14px;
+  }
+}
