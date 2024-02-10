@@ -12,7 +12,7 @@
 }
 
 .list-section__title::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 6px;
   left: 25px;
@@ -89,7 +89,7 @@
 }
 
 .card__author .card__accent {
-  font-family: "Rubic One", sans-serif;
+  font-family: 'Rubic One', sans-serif;
 }
 
 .card__votes {
@@ -97,9 +97,70 @@
 }
 
 .card__votes .card__accent {
-  font-family: "Rubic One", sans-serif;
+  font-family: 'Rubic One', sans-serif;
   display: inline-block;
   padding: 4px 17px 25px 4px;
   background-color: black;
   color: white;
+}
+
+@media (width <= 1440px) {
+  .list-section__title {
+    font-size: 26px;
+  }
+
+  .list-section__title::before {
+    width: 55px;
+    height: 42px;
+  }
+
+  .cards-list {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+  }
+
+  .card__content-block {
+    padding: 16px 16px 26px;
+  }
+
+  .card__title {
+    font-size: 20px;
+  }
+
+  .card__description {
+    font-size: 16px;
+  }
+
+  .card__author {
+    font-size: 16px;
+  }
+
+  .card__votes {
+    font-size: 16px;
+  }
+
+  .card__votes .card__accent {
+    padding: 4px 15px 15px 4px;
+  }
+}
+
+@media (width <= 1024px) {
+  .cards-list {
+    padding: 68px 40px;
+    gap: 30px;
+  }
+}
+
+@media (width <= 650px) {
+  .cards-list {
+    padding: 68px 14px;
+  }
+
+  .list-section__title {
+    padding: 20px 14px 14px;
+  }
+
+  .list-section__title::before {
+    left: 6px;
+  }
 }
