@@ -7,15 +7,15 @@ import { PopularCardsFragment } from './components/CardsList/PopularCardsFragmen
 import { NewCardsFragment } from './components/CardsList/NewCardsFragment';
 import { Promo } from './components/Promo/Promo';
 
-export default function Home() {
+export default function Home(props) {
   return (
     <main className="main">
       <Banner />
-      <CardsList id="popular" title="Популярные">
-        <PopularCardsFragment />
+      <CardsList title={props.id === 'popular' ? 'Популярные' : 'Новинки'}>
+        {props.id === 'popular' ? <PopularCardsFragment /> : <NewCardsFragment />}
       </CardsList>
-      <CardsList id="new" title="Новинки">
-        <NewCardsFragment />
+      <CardsList title={props.id === 'new' ? 'Новинки' : 'Популярные'}>
+        {props.id === 'new' ? <NewCardsFragment /> : <PopularCardsFragment />}
       </CardsList>
       <Promo />
     </main>
