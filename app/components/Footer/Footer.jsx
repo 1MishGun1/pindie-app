@@ -25,10 +25,7 @@ export const Footer = () => {
           </a>
         </li>
         <li className={Styles["social-list__item"]}>
-          <a
-            href=""
-            className={`${Styles.button} ${Styles["social-list__link"]}`}
-          >
+          <a href="" className={`button {Styles["social-list__link"]}`}>
             TG
           </a>
         </li>
