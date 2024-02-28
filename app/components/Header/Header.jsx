@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import Styles from "./Header.module.css";
-import { Overlay } from "../Overlay/Overlay";
-import { Popup } from "../Popup/Popup";
-import { AuthForm } from "../AuthForm/AuthForm";
+import Styles from './Header.module.css';
+import { Overlay } from '../Overlay/Overlay';
+import { Popup } from '../Popup/Popup';
+import { AuthForm } from '../AuthForm/AuthForm';
 
 export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
@@ -18,6 +19,8 @@ export const Header = () => {
   const closePopup = () => {
     setPopupIsOpened(false);
   };
+
+  const pathname = usePathname();
 
   return (
     <header className={Styles.header}>
@@ -31,7 +34,12 @@ export const Header = () => {
       <nav className={Styles.menu}>
         <ul className={Styles.menu__list}>
           <li className={Styles.menu__item}>
-            <Link href="/new" className={Styles.menu__link}>
+            <Link
+              href="/new"
+              className={`${Styles['menu__link']} ${
+                pathname === '/new' ? Styles['menu__link_active'] : ''
+              }`}
+            >
               Новинки
             </Link>
           </li>
