@@ -24,13 +24,13 @@ export const Header = () => {
 
   return (
     <header className={Styles.header}>
-      <a href="./index.html" className={Styles.logo}>
+      <Link href="/" className={Styles.logo}>
         <img
           className={Styles.logo__image}
           src="/images/logo.svg"
           alt="Логотип Pindie"
         />
-      </a>
+      </Link>
       <nav className={Styles.menu}>
         <ul className={Styles.menu__list}>
           <li className={Styles.menu__item}>
