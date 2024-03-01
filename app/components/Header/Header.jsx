@@ -24,21 +24,6 @@ export const Header = () => {
 
   return (
     <header className={Styles.header}>
-      {/* {pathname === '/' ? (
-        <img
-          className={Styles.logo__image}
-          src="/images/logo.svg"
-          alt="Логотип Pindie"
-        />
-      ) : (
-        <Link href="/" className={Styles.logo}>
-          <img
-            className={Styles.logo__image}
-            src="/images/logo.svg"
-            alt="Логотип Pindie"
-          />
-        </Link>
-      )} */}
       <Link
         href="/"
         className={Styles.logo}
