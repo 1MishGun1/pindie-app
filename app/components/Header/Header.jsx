@@ -24,7 +24,28 @@ export const Header = () => {
 
   return (
     <header className={Styles.header}>
-      <Link href="/" className={Styles.logo}>
+      {/* {pathname === '/' ? (
+        <img
+          className={Styles.logo__image}
+          src="/images/logo.svg"
+          alt="Логотип Pindie"
+        />
+      ) : (
+        <Link href="/" className={Styles.logo}>
+          <img
+            className={Styles.logo__image}
+            src="/images/logo.svg"
+            alt="Логотип Pindie"
+          />
+        </Link>
+      )} */}
+      <Link
+        href="/"
+        className={Styles.logo}
+        Style={pathname == "/" ? "pointer-events: none" : ""}
+        aria-disabled={pathname == "/"}
+        tabIndex={pathname == "/" ? -1 : undefined}
+      >
         <img
           className={Styles.logo__image}
           src="/images/logo.svg"
