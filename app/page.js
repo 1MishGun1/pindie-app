@@ -1,7 +1,6 @@
 'use client';
 
 import { getNormalizedGamesDataByCategory } from './api/api-utils';
-// import { getGamesByCategory } from './data/data-utils';
 import { Banner } from './components/Banner/Banner';
 import { CardsList } from './components/CardsList/CardsList';
 import { Promo } from './components/Promo/Promo';
