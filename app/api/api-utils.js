@@ -5,7 +5,6 @@ const getData = async (url) => {
       throw new Error('Ошибка получения данных');
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     return error;
