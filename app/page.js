@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { getNormalizedGamesDataByCategory } from './api/api-utils';
-import { Banner } from './components/Banner/Banner';
-import { CardsList } from './components/CardsList/CardsList';
-import { Promo } from './components/Promo/Promo';
-import { endpoints } from './api/config';
+import { getNormalizedGamesDataByCategory } from "./api/api-utils";
+import { Banner } from "./components/Banner/Banner";
+import { CardsList } from "./components/CardsListSection/CardsList";
+import { Promo } from "./components/Promo/Promo";
+import { endpoints } from "./api/config";
 
 export default async function Home() {
   const popularGames = await getNormalizedGamesDataByCategory(
     endpoints.games,
-    'popular'
+    "popular"
   );
   const newGames = await getNormalizedGamesDataByCategory(
     endpoints.games,
-    'new'
+    "new"
   );
 
   return (
