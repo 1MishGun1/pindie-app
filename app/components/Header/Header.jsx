@@ -12,9 +12,12 @@ import { AuthForm } from "../AuthForm/AuthForm";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/app-context";
 
+import { useStore } from "@/app/store/app-store";
+
 export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
+  const authContext = useStore();
 
   const openPopup = () => {
     setPopupIsOpened(true);
@@ -28,6 +31,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     authContext.logout();
+    // authContext.logout();
   };
 
   return (
