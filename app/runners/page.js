@@ -1,15 +1,19 @@
-import { CardsList } from "../components/CardsList/CardsList";
-import { endpoints } from "../api/config";
-import { getNormalizedGamesDataByCategory } from "@/app/api/api-utils";
+"use client";
 
-export default async function Runner() {
-  const runner = await getNormalizedGamesDataByCategory(
-    endpoints.games,
-    "runner"
-  );
+import { useGetDataByCategory } from "../api/api-hooks";
+import { endpoints } from "../api/config";
+import Preloader from "../components/Preloader/Preloader";
+import { CardsList } from "../components/CardsList/CardsList";
+
+export default function Runner() {
+  const runner = useGetDataByCategory(endpoints.games, "runner");
   return (
     <main className="main-inner">
-      <CardsList id="runner" title="Раннеры" data={runner} />
+      {runner ? (
+        <CardsList id="runner" title="Раннеры" data={runner} />
+      ) : (
+        <Preloader />
+      )}
     </main>
   );
 }
