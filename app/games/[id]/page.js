@@ -15,15 +15,20 @@ import {
 } from "@/app/api/api-utils";
 import Preloader from "@/app/components/Preloader/Preloader";
 
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/app-context";
+
 const GamePage = (props) => {
   const [game, setGame] = useState(null);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [isAuthorized, setIsAuthorized] = useState(false);
+  // const [currentUser, setCurrentUser] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchData() {
+      setPreloaderVisible(true);
       const game = await getNormalizedGameDataById(
         endpoints.games,
         props.params.id
@@ -35,37 +40,40 @@ const GamePage = (props) => {
   }, []);
 
   useEffect(() => {
-    const jwt = getJWT();
-    if (jwt) {
-      getMe(endpoints.me, jwt).then((userData) => {
-        if (isResponseOk(userData)) {
-          setIsAuthorized(true);
-          setCurrentUser(userData);
-        } else {
-          setIsAuthorized(false);
-          removeJWT();
-        }
-      });
-    }
-  }, []);
+    // const jwt = getJWT();
+    // if (jwt) {
+    //   getMe(endpoints.me, jwt).then((userData) => {
+    //     if (isResponseOk(userData)) {
+    //       setIsAuthorized(true);
+    //       setCurrentUser(userData);
+    //     } else {
+    //       setIsAuthorized(false);
+    //       removeJWT();
+    //     }
+    //   });
+    // }
+    authContext.user && game
+      ? setIsVoted(checkIfUserVoted(game, authContext.user.id))
+      : setIsVoted(false);
+  }, [authContext.user, game]);
 
   useEffect(() => {
-    if (currentUser && game) {
-      setIsVoted(checkIfUserVoted(game, currentUser.id));
+    if (authContext.user && game) {
+      setIsVoted(checkIfUserVoted(game, authContext.user.id));
     } else {
       setIsVoted(false);
     }
-  }, [currentUser, game]);
+  }, [authContext.user, game]);
 
   // Update API
   const handleVote = async () => {
-    const jwt = getJWT();
+    const jwt = authContext.token;
     let usersArray = game.users.map((user) => user.id);
 
     if (isVoted) {
-      usersArray = usersArray.filter((id) => id !== currentUser.id);
+      usersArray = usersArray.filter((id) => id !== authContext.user.id);
     } else {
-      usersArray.push(currentUser.id);
+      usersArray.push(authContext.user.id);
     }
 
     if (jwt) {
@@ -80,14 +88,15 @@ const GamePage = (props) => {
           setIsVoted(false);
           setGame({
             ...game,
-            users: game.users.filter((user) => user.id !== currentUser.id),
+            users: game.users.filter((user) => user.id !== authContext.user.id),
           });
         } else {
-          setIsVoted(true);
+          // setIsVoted(true);
           setGame({
             ...game,
-            users: [...game.users, currentUser],
+            users: [...game.users, authContext.user],
           });
+          setIsVoted(true);
         }
       }
     }
@@ -121,7 +130,7 @@ const GamePage = (props) => {
                 </span>
               </p>
               <button
-                disabled={!isAuthorized}
+                disabled={!authContext.isAuth}
                 className={`button ${Styles["about__vote-button"]}`}
                 onClick={handleVote}
               >
