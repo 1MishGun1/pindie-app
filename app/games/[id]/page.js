@@ -18,13 +18,16 @@ import Preloader from "@/app/components/Preloader/Preloader";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/app-context";
 
+import { useStore } from "@/app/store/app-store";
+
 const GamePage = (props) => {
   const [game, setGame] = useState(null);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   // const [isAuthorized, setIsAuthorized] = useState(false);
   // const [currentUser, setCurrentUser] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
+  const authContext = useStore();
 
   useEffect(() => {
     async function fetchData() {
