@@ -15,18 +15,12 @@ import {
 } from "@/app/api/api-utils";
 import Preloader from "@/app/components/Preloader/Preloader";
 
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/app-context";
-
 import { useStore } from "@/app/store/app-store";
 
 const GamePage = (props) => {
   const [game, setGame] = useState(null);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  // const [currentUser, setCurrentUser] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
-  // const authContext = useContext(AuthContext);
   const authContext = useStore();
 
   useEffect(() => {
@@ -43,18 +37,6 @@ const GamePage = (props) => {
   }, []);
 
   useEffect(() => {
-    // const jwt = getJWT();
-    // if (jwt) {
-    //   getMe(endpoints.me, jwt).then((userData) => {
-    //     if (isResponseOk(userData)) {
-    //       setIsAuthorized(true);
-    //       setCurrentUser(userData);
-    //     } else {
-    //       setIsAuthorized(false);
-    //       removeJWT();
-    //     }
-    //   });
-    // }
     authContext.user && game
       ? setIsVoted(checkIfUserVoted(game, authContext.user.id))
       : setIsVoted(false);
@@ -94,7 +76,6 @@ const GamePage = (props) => {
             users: game.users.filter((user) => user.id !== authContext.user.id),
           });
         } else {
-          // setIsVoted(true);
           setGame({
             ...game,
             users: [...game.users, authContext.user],
