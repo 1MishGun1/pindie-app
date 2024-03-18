@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,14 +9,10 @@ import { Overlay } from "../Overlay/Overlay";
 import { Popup } from "../Popup/Popup";
 import { AuthForm } from "../AuthForm/AuthForm";
 
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/app-context";
-
 import { useStore } from "@/app/store/app-store";
 
 export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
-  // const authContext = useContext(AuthContext);
   const authContext = useStore();
 
   const openPopup = () => {
@@ -31,7 +27,6 @@ export const Header = () => {
 
   const handleLogout = () => {
     authContext.logout();
-    // authContext.logout();
   };
 
   return (
