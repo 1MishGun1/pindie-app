@@ -9,12 +9,12 @@ import { Overlay } from "../Overlay/Overlay";
 import { Popup } from "../Popup/Popup";
 import { AuthForm } from "../AuthForm/AuthForm";
 
-import { endpoints } from "@/app/api/config";
-import { getJWT, removeJWT, getMe, isResponseOk } from "@/app/api/api-utils";
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/app-context";
 
 export const Header = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const [popupIsOpened, setPopupIsOpened] = useState(false);
+  const authContext = useContext(AuthContext);
 
   const openPopup = () => {
     setPopupIsOpened(true);
@@ -26,23 +26,8 @@ export const Header = () => {
 
   const pathname = usePathname();
 
-  useEffect(() => {
-    const jwt = getJWT();
-    if (jwt) {
-      getMe(endpoints.me, jwt).then((userData) => {
-        if (isResponseOk(userData)) {
-          setIsAuthorized(true);
-        } else {
-          setIsAuthorized(false);
-          removeJWT();
-        }
-      });
-    }
-  }, []);
-
   const handleLogout = () => {
-    setIsAuthorized(false);
-    removeJWT();
+    authContext.logout();
   };
 
   return (
@@ -128,7 +113,7 @@ export const Header = () => {
           </li>
         </ul>
         <div className={Styles.auth}>
-          {isAuthorized ? (
+          {authContext.isAuth ? (
             <button className={Styles.auth__button} onClick={handleLogout}>
               Выйти
             </button>
@@ -141,7 +126,7 @@ export const Header = () => {
       </nav>
       <Overlay isOpen={popupIsOpened} close={closePopup} />
       <Popup isOpen={popupIsOpened} close={closePopup}>
-        <AuthForm close={closePopup} setAuth={setIsAuthorized} />
+        <AuthForm close={closePopup} />
       </Popup>
     </header>
   );
