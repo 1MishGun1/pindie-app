@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { getJWT, setJWT, removeJWT, getMe } from "./api/api-utils";
 import { endpoints } from "./api/config";
 
+import { AuthContext } from "./context/app-context";
+
 export const App = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null);
@@ -47,9 +49,11 @@ export const App = (props) => {
 
   return (
     <>
-      <Header />
-      {props.children}
-      <Footer />
+      <AuthContext.Provider value={{ isAuth, user, token, login, logout }}>
+        <Header />
+        {props.children}
+        <Footer />
+      </AuthContext.Provider>
     </>
   );
 };
