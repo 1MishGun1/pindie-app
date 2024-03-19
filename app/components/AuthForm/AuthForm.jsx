@@ -5,8 +5,10 @@ import Styles from "./AuthForm.module.css";
 import { isResponseOk } from "@/app/api/api-utils";
 import { authorize, getMe } from "@/app/api/api-utils";
 import { endpoints } from "@/app/api/config";
-
 import { useStore } from "@/app/store/app-store";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const AuthForm = (props) => {
   const [authData, setAuthData] = useState({ identifier: "", password: "" });
@@ -78,6 +80,9 @@ export const AuthForm = (props) => {
           Войти
         </button>
       </div>
+      <button className={Styles["form__reg"]} type="submit">
+        <Link href="/register">Зарегистрироваться</Link>
+      </button>
     </form>
   );
 };
