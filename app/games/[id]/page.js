@@ -5,9 +5,6 @@ import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { useEffect, useState } from "react";
 import { endpoints } from "@/app/api/config";
 import {
-  getJWT,
-  removeJWT,
-  getMe,
   isResponseOk,
   getNormalizedGameDataById,
   checkIfUserVoted,
