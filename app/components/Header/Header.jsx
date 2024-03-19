@@ -110,6 +110,16 @@ export const Header = () => {
               TDS
             </Link>
           </li>
+          <li className={Styles.menu__item}>
+            <Link
+              href="/me"
+              className={`${Styles["menu__link"]} ${
+                pathname === "/me" ? Styles["menu__link_active"] : ""
+              } ${authContext.isAuth ? "" : Styles["menu__link_disable"]}`}
+            >
+              Аккаунт
+            </Link>
+          </li>
         </ul>
         <div className={Styles.auth}>
           {authContext.isAuth ? (
