@@ -2,7 +2,8 @@
 
 import { getNormalizedGamesDataByCategory } from "./api/api-utils";
 import { Banner } from "./components/Banner/Banner";
-import { CardsList } from "./components/CardsListSection/CardsList";
+// import { CardsList } from "./components/CardsListSection/CardsList";
+import { CardListSection } from "./components/CardsListSection/CardListSection";
 import { Promo } from "./components/Promo/Promo";
 import { endpoints } from "./api/config";
 
@@ -19,8 +20,13 @@ export default async function Home() {
   return (
     <main className="main">
       <Banner />
-      <CardsList id="popular" title="Популярное" data={popularGames} />
-      <CardsList id="new" title="Новинки" data={newGames} />
+      <CardListSection
+        id="popular"
+        title="Популярное"
+        data={popularGames}
+        type="slider"
+      />
+      <CardListSection id="new" title="Новинки" data={newGames} type="slider" />
       <Promo />
     </main>
   );
