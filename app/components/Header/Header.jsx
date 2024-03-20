@@ -10,10 +10,12 @@ import { Popup } from "../Popup/Popup";
 import { AuthForm } from "../AuthForm/AuthForm";
 
 import { useStore } from "@/app/store/app-store";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
   const authContext = useStore();
+  const router = useRouter();
 
   const openPopup = () => {
     setPopupIsOpened(true);
@@ -27,6 +29,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     authContext.logout();
+    router.push("/");
   };
 
   return (
