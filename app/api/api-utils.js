@@ -49,7 +49,7 @@ export const register = async (url, data) => {
       body: JSON.stringify(data),
     });
     if (response.status !== 200) {
-      throw new Error("Ошибка авторизации");
+      throw new Error("Ошибка регистрации");
     }
     const result = await response.json();
     return result;
