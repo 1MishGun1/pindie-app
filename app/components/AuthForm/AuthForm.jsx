@@ -16,14 +16,12 @@ export const AuthForm = (props) => {
   const authContext = useStore();
 
   const handleInput = (e) => {
-    // const newAuthData = authData;
-    // newAuthData[e.target.name] = e.target.value;
-    // setAuthData(newAuthData);
     setAuthData({ ...authData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(authData);
     const userData = await authorize(endpoints.auth, authData);
     if (isResponseOk(userData)) {
       await getMe(endpoints.me, userData.jwt);
@@ -31,6 +29,9 @@ export const AuthForm = (props) => {
       setMessage({ status: "success", text: "Вы авторизовались!" });
     } else {
       setMessage({ status: "error", text: "Неверные почта или пароль" });
+    }
+    if (isResponseOk(authData)) {
+      setAuthData(authData.user);
     }
   };
 
